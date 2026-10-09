@@ -29,9 +29,9 @@ You play a toy trying to stop its owner from abusing it further.
 ## 🎮 How to Play
 
 ### Controls
-A = Shoot For Scissors
-S = Shoot For Book (Paper)
-D = Shoot for Paperweight (Rock)
+* A = Shoot For Scissors
+* S = Shoot For Book (Paper)
+* D = Shoot for Paperweight (Rock)
 
 ### Main Scene
 The main playable scene is located at: `Assets/Scenes/MainGame.unity`. Open this scene and press the **Play** button in the Unity Editor to test.
