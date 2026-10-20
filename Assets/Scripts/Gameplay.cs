@@ -20,6 +20,7 @@ public class Gameplay : MonoBehaviour
     {
         weapon = GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponUsage>();
         rueEnemy = GameObject.FindGameObjectWithTag("Rue").GetComponent<RueScript>();
+        Debug.Log("Choose your object.");
     }
 
     // Update is called once per frame
@@ -30,7 +31,6 @@ public class Gameplay : MonoBehaviour
     }
     void activateTool(GameObject rueObject)
     {
-        Debug.Log("Choose your object.");
         if (Input.GetKeyDown(KeyCode.A))
         {
             dealObject = scissor;
