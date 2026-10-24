@@ -10,6 +10,7 @@ public class WeaponUsage : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
+    public static bool winLose = false;
 
     // This keeps track of the different choices.
     public enum ToolChoice
@@ -104,12 +105,13 @@ public class WeaponUsage : MonoBehaviour
 
     string RueLosesHP(string message)
     {
-
+        winLose = true;
         return message;
     }
 
     string PlayerLosesHP(string message)
     {
+        winLose = false;
         return message;
     }
 }
