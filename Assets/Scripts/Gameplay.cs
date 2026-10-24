@@ -1,17 +1,21 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 // This class is for the main gameplay loop. It will call from other classes to make the game function as intended.
 public class Gameplay : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     // This will keep track of rounds as well as max rounds.
     public int rounds = 0;
     public int maxRounds = 5;
     public GameObject scissor, book, paperweight;
     public GameObject dealObject;
     public GameObject rueObject;
+    public InputActionReference chooseObject;
+
     // Private Variables
     private WeaponUsage weapon;
     private RueScript rueEnemy;
@@ -26,25 +30,42 @@ public class Gameplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject rueChoice = rueEnemy.rueRandomTool();
-        activateTool(rueChoice);
+
     }
-    void activateTool(GameObject rueObject)
+
+    private void OnEnable()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        chooseObject.action.started += ObjectChosen;
+    }
+
+    private void OnDisable()
+    {
+        chooseObject.action.started -= ObjectChosen;
+    }
+
+    private void ObjectChosen(InputAction.CallbackContext obj)
+    {
+        Debug.Log("Object Chosen.");
+
+        string pressedKey = obj.control.name.ToLower();
+
+        if (pressedKey == "a")
         {
             dealObject = scissor;
-            weapon.checkTools(dealObject, rueObject);
+            Debug.Log("Scissor, It Is.");
         }
-        else if (Input.GetKeyDown(KeyCode.S))
+        else if (pressedKey == "s")
         {
             dealObject = book;
-            weapon.checkTools(dealObject, rueObject);
+            Debug.Log("Book, It Is.");
         }
-        else if (Input.GetKeyDown(KeyCode.D))
+        else if (pressedKey == "d")
         {
             dealObject = paperweight;
-            weapon.checkTools(dealObject, rueObject);
+            Debug.Log("Paperweight, It Is.");
         }
+
+        rueObject = rueEnemy.rueRandomTool();
+        weapon.checkTools(dealObject, rueObject);
     }
 }

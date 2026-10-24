@@ -854,10 +854,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 129060978f939af46a8f48bfa42c21cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  objectList: []
-  scissor: {fileID: 1396358387}
-  book: {fileID: 978028509}
-  paperweight: {fileID: 1682550582}
   playerTool: 0
   rueTool: 0
 --- !u!1 &619394800
