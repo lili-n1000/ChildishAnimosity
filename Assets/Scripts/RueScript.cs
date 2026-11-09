@@ -16,6 +16,7 @@ public class RueScript : MonoBehaviour
     public List<GameObject> objectList;
     System.Random rand = new System.Random();
 
+    // This uses indices to randomize the sign it will be next.
     public GameObject rueRandomTool()
     {
         gameObjectAddToList();

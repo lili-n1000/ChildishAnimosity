@@ -10,7 +10,9 @@ public class WeaponUsage : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    public static bool winLose = false;
+    // Win Condition: True for Win, false for lose
+    public static bool winLosePlayer = false;
+    public static bool winLoseRue = false;
 
     // This keeps track of the different choices.
     public enum ToolChoice
@@ -25,6 +27,9 @@ public class WeaponUsage : MonoBehaviour
 
     public void checkTools(GameObject dealObject, GameObject rueObject)
     {
+        // To ensure that the winLose condition is reset to false.
+        winLosePlayer = false;
+        winLoseRue = false;
         // This will convert the player's GameObject name to Enum
         if (TryGetEnumFromObject(dealObject, out ToolChoice chosenPlayerTool))
         {
@@ -105,13 +110,13 @@ public class WeaponUsage : MonoBehaviour
 
     string RueLosesHP(string message)
     {
-        winLose = true;
+        winLosePlayer = true;
         return message;
     }
 
     string PlayerLosesHP(string message)
     {
-        winLose = false;
+        winLoseRue = true;
         return message;
     }
 }

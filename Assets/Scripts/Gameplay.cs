@@ -13,8 +13,10 @@ public class Gameplay : MonoBehaviour
     public int maxRounds = 5;
 
     // Health of Rue or Player
-    public int playerHealth = 3;
-    public int rueHealth = 3;
+    public float playerHealth = 3f;
+    public float maxPlayerHealth = 3f;
+    public float rueHealth = 3f;
+    public float maxRueHealth = 3f;
 
     public GameObject scissor, book, paperweight;
     public GameObject dealObject;
@@ -24,6 +26,8 @@ public class Gameplay : MonoBehaviour
     // Private Variables
     private WeaponUsage weapon;
     private RueScript rueEnemy;
+    private bool underFiftyPlayer= false;
+    private bool underFiftyRue = false;
 
     void Start()
     {
@@ -54,8 +58,6 @@ public class Gameplay : MonoBehaviour
     // is passed through, then an action happens.
     private void ObjectChosen(InputAction.CallbackContext obj)
     {
-        Debug.Log("Object Chosen.");
-
         string pressedKey = obj.control.name.ToLower();
 
         if (pressedKey == "a")
@@ -77,16 +79,29 @@ public class Gameplay : MonoBehaviour
         weapon.checkTools(dealObject, rueObject);
 
         // This will keep track if the player or Rue loses HP.
-        if (WeaponUsage.winLose == true)
+        if (WeaponUsage.winLosePlayer == true)
         {
             rueHealth -= 1;
             Debug.Log("Rue Health = " + rueHealth);
         }
-        else {
+        else if (WeaponUsage.winLoseRue == true) {
             playerHealth -= 1;
             Debug.Log("Player Health = " + playerHealth);
         }
 
+        // If HPs are under 50%, danger prompt appears
+        if (playerHealth <= maxPlayerHealth / 2 && underFiftyPlayer != true)
+        {
+            Debug.Log("DANGER: PLAYER IS UNDER 50%");
+            underFiftyPlayer = true;
+        }
+        else if (rueHealth <= maxRueHealth / 2 && underFiftyRue != true)
+        {
+            Debug.Log("ALERT: RUE MAY DIE!");
+            underFiftyRue = true;
+        }
+
+        // Prompts for healths going to 0.
         if (playerHealth <= 0)
         {
             Debug.Log("Player has lost! Game Over!");
@@ -105,7 +120,11 @@ public class Gameplay : MonoBehaviour
         rounds += 1;
         Debug.Log("Round 1!");
         rueHealth = 3 + 2 * rounds;
+        maxRueHealth = 3 + 2 * rounds;
+        maxPlayerHealth = 3 + rounds;
         playerHealth = 3 + rounds;
+        underFiftyRue = false;
+        underFiftyPlayer = false;
     }
 
 }
