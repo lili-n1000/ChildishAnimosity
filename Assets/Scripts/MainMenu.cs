@@ -11,4 +11,17 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    // Opens the setting option for volume adjustment
+    public void OpenSettings()
+    {
+
+    }
+
+    // For the exit button
+    public void ExitGame()
+    {
+        Debug.Log("Exiting the Game...");
+        Application.Quit();
+    }
+
 }
