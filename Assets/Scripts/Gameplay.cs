@@ -18,14 +18,16 @@ public class Gameplay : MonoBehaviour
     public float rueHealth = 3f;
     public float maxRueHealth = 3f;
 
+    // Object Stuff
     public GameObject scissor, book, paperweight;
     public GameObject dealObject;
     public GameObject rueObject;
     public InputActionReference chooseObject;
 
-    // Private Variables
-    private WeaponUsage weapon;
-    private RueScript rueEnemy;
+    // Script References
+    [SerializeField] private GameOverScreenScript gameOver;
+    [SerializeField] private WeaponUsage weapon;
+    [SerializeField] private RueScript rueEnemy;
     private bool underFiftyPlayer= false;
     private bool underFiftyRue = false;
 
@@ -105,6 +107,8 @@ public class Gameplay : MonoBehaviour
         if (playerHealth <= 0)
         {
             Debug.Log("Player has lost! Game Over!");
+            gameOver.gameObject.SetActive(true);
+            
         }
         else if (rueHealth <= 0)
         {
